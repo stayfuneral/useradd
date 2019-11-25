@@ -18,15 +18,6 @@ window.onload = function () {
             }
         });
     });
-    let genderVerb = '';
-    switch(userData.gender) {
-        case 'M':
-            genderVerb += 'добавлен';
-            break;
-        case 'F':
-            genderVerb += 'добавлена';
-            break;
-    }
     let button = document.querySelector('button[type = submit]');
     button.addEventListener('click', function () {
         BX.ajax({
