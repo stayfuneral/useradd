@@ -1,5 +1,5 @@
 userData = {};
-window.onload = function () { // получение данных из формы
+window.onload = function () { // get data from registration form
     let inputs = document.querySelectorAll('input[type=text], input[type=email], input[type=checkbox], select');
     inputs.forEach(function (item) {
         item.addEventListener('change', function () {

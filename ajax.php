@@ -24,14 +24,18 @@ if ($_POST) {
     }
     $response = [];
 
+    // create new user
     $user = new CUser;
     $ID = $user->Add($arFields);
+    
     if (intval($ID) > 0) {
-        if ($_POST['ufHead'] == true) {
+        if ($_POST['ufHead'] == true) { // change department
             $dep = new CIBlockSection;
             $dep->Update($_POST['department'], ["UF_HEAD" => $ID]);
         }
         
+        
+        // create task for new user
         CModule::IncludeModule('tasks');
         $TSK = new CTasks;
         $desc = '<p>'.$arFields['NAME'] . ' ' . $arFields['LAST_NAME'] . ',</p>
@@ -68,12 +72,14 @@ if ($_POST) {
             $response['taskId'] = $taskId;
         }
         
+        // send registration info to new user's email
         CUser::SendUserInfo($ID, 's1', $message, true, 'USER_ADD');
         
         CModule::IncludeModule('iblock');
         $department = CIBlockSection::GetByID($_POST['department']);
         $dep = $department->GetNext(true, false);
         
+        // request to bot for notification
         $notifyParams = [
             'BOT_ID' => 493,
             'CLIENT_ID' => 'mrBean',
@@ -92,10 +98,11 @@ if ($_POST) {
             ]
         ];
         callCurl('https://bx.bookingboard.ru/bot/events.php', $notifyParams);
+        //success response
         $response['result'] = 'success';
         $response['ID'] = $ID;
         $response['NAME'] = $arFields['NAME'] . ' ' . $arFields['LAST_NAME'];
-    } else {
+    } else { // error response
         $response['result'] = 'error';
         $response['result_message'] = $user->LAST_ERROR;
     }

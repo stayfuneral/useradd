@@ -7,6 +7,7 @@ use Bitrix\Main\Page\Asset;
 Asset::getInstance()->addCss("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
 Asset::getInstance()->addJs('/useradd/script.js');
 \Bitrix\Main\UI\Extension::load("ui.buttons");
+//get departments list
 CModule::IncludeModule('iblock');
 $arFilter = ['IBLOCK_ID' => 1];
 $arSelect = ['ID', 'NAME', 'LEFT_MARGIN', 'DEPTH_LEVEL'];
