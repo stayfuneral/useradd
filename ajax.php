@@ -23,6 +23,7 @@ if ($_POST) {
         $arFields['GROUP_ID'][] = 9;
     }
     $response = [];
+
     $user = new CUser;
     $ID = $user->Add($arFields);
     if (intval($ID) > 0) {
