@@ -42,10 +42,9 @@ window.onload = function () { // get data from registration form
                     },
                     html: text
                 }), BX('result'));
-                console.log(response);
+                
             },
             onfailure: function(error) {
-                console.log(error);
             }
         });
     });
