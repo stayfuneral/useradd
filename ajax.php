@@ -9,15 +9,15 @@ if ($_POST) {
         'LAST_NAME' => htmlspecialchars($_POST['lastName']),
         'ACTIVE' => 'Y',
         'LOGIN' => preg_replace("/\@.+/", "", htmlspecialchars($_POST['email'])),
-        'PASSWORD' => 'Qwerty#123',
-        'CONFIRM_PASSWORD' => 'Qwerty#123',
+        'PASSWORD' => '******',
+        'CONFIRM_PASSWORD' => '******',
         'EMAIL' => htmlspecialchars($_POST['email']),
         'UF_DEPARTMENT' => [$_POST['department']],
         'WORK_POSITION' => htmlspecialchars($_POST['position']),
         'PERSONAL_GENDER' => $_POST['gender'],
         'GROUP_ID' => [11],
         'LID' => 's1',
-        'WORK_PHONE' => '8 (383) 209-06-90'
+        'WORK_PHONE' => '8 (383) 209-xx-xx'
     ];
     if($_POST['ufHead'] == true) {
         $arFields['GROUP_ID'][] = 9;
@@ -50,7 +50,7 @@ if ($_POST) {
 
 Перед тем, как перейти на страницу редактирования профиля, возьмите данную задачу в работу, нажав на кнопку [B]"Начать учёт моего времени"[/B]. После выполнения задачи нажмите на кнопку [B]"Завершить"[/B].
 
-В случае возникновения каких-либо вопросов, вы можете обратиться к специалисту по Битрикс [URL=/company/personal/user/331/]Роману Гонюкову[/URL] либо задать их в комментариях к данной задаче (предпочтительный способ).';
+В случае возникновения каких-либо вопросов, вы можете задать их в комментариях к данной задаче.';
 
         $taskParams = [
             'TITLE' => 'Заполнить профиль',
@@ -66,7 +66,7 @@ if ($_POST) {
         ];
         $taskId = $TSK->Add($taskParams);
         $message = '<p><b>Данные для входа:</b></p>'
-                . '<p><a href="https://bx.bookingboard.ru">https://bx.bookingboard.ru</a><br>'
+                . '<p><a href="https://domain.ru">https://domain.ru</a><br>'
                 . 'Логин: '.$arFields['LOGIN'].'<br>'
                 . 'Пароль: '.$arFields['PASSWORD'].'</p>'
                 . '<p>Не забудьте сменить пароль при первой авторизации.</p>';
@@ -83,8 +83,8 @@ if ($_POST) {
         
         // request to bot for notification
         $notifyParams = [
-            'BOT_ID' => 493,
-            'CLIENT_ID' => 'mrBean',
+            'BOT_ID' => $botId,
+            'CLIENT_ID' => '$clientId',
             'event' => 'ONAFTERUSERADD',
             'data' => [
                 'USER' => [
@@ -99,7 +99,7 @@ if ($_POST) {
                 ]
             ]
         ];
-        callCurl('https://bx.bookingboard.ru/bot/events.php', $notifyParams);
+        callCurl('https://handler.php', $notifyParams);
         //success response
         $response['result'] = 'success';
         $response['ID'] = $ID;
